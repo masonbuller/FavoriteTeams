@@ -1,4 +1,4 @@
-<h1>Favorite Teams</h1>
+<h1>Favorite Teams Interface Using JavaFX and MySQL</h1>
 <h2>Description</h2>
 <p>Project consists of a JavaFX interface that connects to a MySQL database to display and allow the user to update information.</p>
 
