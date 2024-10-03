@@ -31,12 +31,12 @@
 
 <br>
 
-<img src="https://imgur.com/UsSsQWk.png" height="60%" width="60%" alt="Form interface"/>
+<img src="https://imgur.com/UsSsQWk.png" height="45%" width="45%" alt="Form interface"/>
 
 <br>
 
-<img src="https://imgur.com/E3KlVFa.png" height="60%" width="60%" alt="Update error"/>
+<img src="https://imgur.com/E3KlVFa.png" height="45%" width="45%" alt="Update error"/>
 
 <br>
 
-<img src="https://imgur.com/QA1g2bq.png" height="60%" width="60%" alt="Update successful"/>
+<img src="https://imgur.com/QA1g2bq.png" height="45%" width="45%" alt="Update successful"/>
