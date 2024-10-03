@@ -26,15 +26,17 @@
 - <b>Windows 10</b>
 
 <br>
-
+<h3>Displaying Information</h3>
 <img src="https://imgur.com/l9NVBRq.png" height="80%" width="80%" alt="Table Data"/>
 
 <br>
 
+<h3>Update Error</h3>
 <img src="https://imgur.com/UsSsQWk.png" height="45%" width="45%" alt="Form interface"/>
 
 <br>
 
+<h3>Update Successful</h3>
 <img src="https://imgur.com/E3KlVFa.png" height="45%" width="45%" alt="Update error"/>
 
 <br>
