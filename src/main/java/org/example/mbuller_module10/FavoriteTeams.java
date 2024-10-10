@@ -1,4 +1,4 @@
-package org.example.mbuller_module10;
+package org.example.favoriteteams;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -13,8 +13,9 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Objects;
 
-public class HelloApplication extends Application {
+public class FavoriteTeams extends Application {
     Connection con;
     Statement st;
     PreparedStatement preparedStatement;
@@ -48,26 +49,21 @@ public class HelloApplication extends Application {
         try {
             Button btnUpdate = new Button("Update");
             Button btnDisplay = new Button("Display");
-            HBox hbox1 = new HBox(5);
             HBox hbox2 = new HBox(5);
             VBox vbox = new VBox(5);
 
-            hbox1.getChildren().addAll(new Label("ID"), tfID);
+            HBox hbox1 = new HBox(5, new Label("ID"), tfID);
             hbox1.setAlignment(Pos.CENTER);
 
-            VBox vLabels = new VBox(5);
-            vLabels.getChildren().addAll(new Label("ID"), new Label("FName"), new Label("LName"), new Label("Team"));
+            VBox vLabels = new VBox(5, new Label("ID"), new Label("FName"), new Label("LName"), new Label("Team"));
             vLabels.setAlignment(Pos.CENTER);
             vLabels.setSpacing(15);
 
-            VBox vTexts = new VBox(5);
-            vTexts.getChildren().addAll(lblID, tfFName, tfLName, tfTeam);
+            VBox vTexts = new VBox(5, lblID, tfFName, tfLName, tfTeam);
             vTexts.setAlignment(Pos.CENTER_LEFT);
             vTexts.setSpacing(10);
 
-            HBox hLabel1 = new HBox(5);
-            hLabel1.getChildren().addAll(vLabels, vTexts);
-
+            HBox hLabel1 = new HBox(5, vLabels, vTexts);
             hLabel1.setAlignment(Pos.CENTER);
             hLabel1.setPadding(new Insets(20));
 
@@ -77,8 +73,10 @@ public class HelloApplication extends Application {
             vbox.getChildren().addAll(hbox1, hLabel1, hbox2);
             vbox.setAlignment(Pos.CENTER);
             vbox.setPadding(new Insets(20));
+
             btnDisplay.setOnAction(e -> showInfo());
             btnUpdate.setOnAction(e -> updateInfo());
+
             Scene scene = new Scene(vbox);
             stage.setScene(scene);
             stage.setTitle("Favorite Teams");
@@ -120,43 +118,77 @@ public class HelloApplication extends Application {
     }
 
     private void updateInfo() {
-        if (tfFName.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("First Name is blank. Please enter a value.");
-            alert.showAndWait();
-        } else if (tfLName.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Last Name is blank. Please enter a value.");
-            alert.showAndWait();
-        } else if (tfTeam.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Favorite team is blank. Please enter a value.");
-            alert.showAndWait();
-        } else {
-            String id = lblID.getText();
-            String fname = tfFName.getText();
-            String lname = tfLName.getText();
-            String team =tfTeam.getText();
+        String id = tfID.getText();
 
-            try {
-                preparedStatement2.setString(1, fname);
-                preparedStatement2.setString(2, lname);
-                preparedStatement2.setString(3, team);
-                preparedStatement2.setString(4, id);
-                preparedStatement2.execute();
+        String firstname = "";
+        String lastname = "";
+        String favoriteTeam = "";
+        boolean test = true;
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Update successful.");
+        try {
+            preparedStatement.setString(1, id);
+            ResultSet rset = preparedStatement.executeQuery();
+
+            if (rset.next()) {
+                String ID = rset.getString(1);
+                firstname = rset.getString(2);
+                lastname = rset.getString(3);
+                favoriteTeam = rset.getString(4);
+
+            } else {
+                test = false;
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("ID not found.");
                 alert.showAndWait();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.exit(0);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+        if (test) {
+            if (tfFName.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("First Name is blank. Please enter a value.");
+                alert.showAndWait();
+            } else if (tfLName.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Last Name is blank. Please enter a value.");
+                alert.showAndWait();
+            } else if (tfTeam.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Favorite team is blank. Please enter a value.");
+                alert.showAndWait();
+            } else if (Objects.equals(tfFName.getText(), firstname) && Objects.equals(tfLName.getText(), lastname) && Objects.equals(tfTeam.getText(), favoriteTeam)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Please change a value in one of the fields.");
+                alert.showAndWait();
+            } else {
+                String idtxt = lblID.getText();
+                String fname = tfFName.getText();
+                String lname = tfLName.getText();
+                String team = tfTeam.getText();
+
+                try {
+                    preparedStatement2.setString(1, fname);
+                    preparedStatement2.setString(2, lname);
+                    preparedStatement2.setString(3, team);
+                    preparedStatement2.setString(4, idtxt);
+                    preparedStatement2.execute();
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setContentText("Update successful.");
+                    alert.showAndWait();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.exit(0);
+                }
+            }
+
         }
     }
-
-
 
     public static void main(String[] args) {
         launch();
