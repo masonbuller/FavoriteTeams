@@ -17,7 +17,6 @@ import java.util.Objects;
 
 public class FavoriteTeams extends Application {
     Connection con;
-    Statement st;
     PreparedStatement preparedStatement;
     PreparedStatement preparedStatement2;
 
