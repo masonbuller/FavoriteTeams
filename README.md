@@ -8,8 +8,6 @@
 
 - <b>Java</b>
 
-<br>
-
 <h2>Frameworks Used</h2>
 
 - <b>Maven</b>
