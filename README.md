@@ -17,7 +17,7 @@
 
 <h2>Libraries Used</h2>
 
-- <b>JDBC/b>
+- <b>JDBC</b>
 - <b>MySQL Connector</b>
 
 <br>
