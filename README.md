@@ -20,7 +20,7 @@
 
 <br>
 
-<h2>Enviornments Used</h2>
+<h2>Environments Used</h2>
 
 - <b>IntelliJ IDEA</b>
 - <b>Windows 10</b>
